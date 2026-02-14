@@ -1,0 +1,21 @@
+tensorflow==2.13.0
+opencv-python==4.8.1.78
+numpy==1.24.3
+streamlit==1.28.1
+plotly==5.17.0
+altair==5.1.2
+pandas==2.0.3
+Pillow==10.0.1
+pyserial==3.5
+scikit-learn==1.3.0
+matplotlib==3.7.2
+
+
+# # Make sure you're in the right directory
+# cd ~/Downloads/My_Projects/Blood_Group_Detection_Using_FingerPrint/src
+
+# # Activate environment (if not already)
+# source ~/tfenv/bin/activate
+
+# # Run the app
+# streamlit run streamlit_gui.py
