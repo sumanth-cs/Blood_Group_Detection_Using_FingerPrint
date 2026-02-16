@@ -19,3 +19,8 @@ matplotlib==3.7.2
 
 # # Run the app
 # streamlit run streamlit_gui.py
+
+# 3. Verify the Connection in Terminal 
+# Plug the USB cable into your Mac and open the Terminal app. Run the following command to find your sensor's port name: 
+# bash
+# ls /dev/cu.usbserial*

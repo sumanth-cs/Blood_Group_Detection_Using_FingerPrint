@@ -61,7 +61,42 @@ st.markdown("""
 # ============================================
 # FUNCTION DEFINITIONS
 # ============================================
-
+# Add this function to your streamlit_gui.py
+def capture_and_display():
+    """Enhanced capture function for Streamlit."""
+    
+    # Initialize hardware
+    from hardware_capture import FingerprintSensor
+    sensor = FingerprintSensor('/dev/cu.usbserial-1420')
+    
+    if not sensor.connected:
+        st.error("Sensor not connected. Using demo mode.")
+        return
+    
+    with st.spinner("Waiting for finger..."):
+        result = sensor.capture_for_display()
+    
+    if result:
+        # Create tabs to show different views
+        tab1, tab2, tab3 = st.tabs(["Raw Capture", "Enhanced (AI-Ready)", "Edge Detection"])
+        
+        with tab1:
+            st.image(result['raw'], caption="Raw Sensor Output", use_container_width=True)
+            st.info("This is what the sensor sees - notice the 'spiral' pattern")
+        
+        with tab2:
+            st.image(result['enhanced'], caption="Enhanced for AI", use_container_width=True)
+            st.success("After enhancement - now matches training data quality!")
+        
+        with tab3:
+            st.image(result['edges'], caption="Edge Detection", use_container_width=True)
+            st.info("AI focuses on these ridge patterns")
+        
+        # Now use the enhanced image for prediction
+        process_and_predict(result['for_ai'], model, blood_groups, group_colors, results_placeholder)
+    
+    sensor.close()
+    
 def display_results(predictions, blood_groups, group_colors, results_placeholder):
     """Display prediction results in the results container."""
     
